@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-farwind-blue: #1E3A5F;
+  --color-farwind-gold: #C9A227;
+  --color-farwind-beige: #D4C4A1;
+  --font-serif: "Cambria", "Georgia", serif;
+}
+
+/* Reset básico para evitar que los estilos de Vite interfieran */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  display: block; /* Importante: Vite a veces pone flex aquí */
+  min-width: 100%;
+  min-height: 100vh;
+}

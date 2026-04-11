@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Real | Renn Farwind</title>
+</head>
+<body class="bg-gray-50 font-serif">
+
+    <div id="header-main"></div>
+
+   <main class="container mx-auto px-6 py-16">
+    <h1 class="text-4xl font-serif text-farwind-blue mb-12">Laboratorio de Pociones</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <div class="producto-card cursor-pointer group bg-white p-4 rounded-2xl shadow-md border border-gray-100 hover:border-farwind-gold transition-all"
+             data-nombre="Poción de Golondrina" 
+             data-precio="150 Coronas"
+             data-desc="Acelera la regeneración de vitalidad. Esencial para cualquier brujo tras un combate intenso."
+             data-img="/media/img/pociones/golondrina.png">
+            
+            <img src="/media/img/pociones/golondrina.png" class="w-full aspect-square object-contain mb-4">
+            <h3 class="text-xl font-bold text-farwind-blue">Golondrina</h3>
+            <p class="text-farwind-gold font-bold">150 Coronas</p>
+        </div>
+
+        </div>
+</main>
+
+<div id="modal-producto" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+    <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    
+    <div class="relative bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-in fade-in zoom-in duration-300">
+        <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-farwind-blue text-2xl z-10">&times;</button>
+        
+        <div class="md:w-1/2 bg-gray-100 p-8 flex items-center justify-center">
+            <img id="modal-img" src="" class="max-h-64 object-contain">
+        </div>
+        
+        <div class="md:w-1/2 p-8 space-y-4">
+            <h2 id="modal-title" class="text-3xl font-serif text-farwind-blue"></h2>
+            <p id="modal-price" class="text-xl text-farwind-gold font-bold"></p>
+            <p id="modal-desc" class="text-gray-600 leading-relaxed"></p>
+            <button class="w-full py-4 bg-farwind-blue text-white rounded-xl font-bold hover:bg-farwind-gold transition-all">
+                Añadir al Gremio
+            </button>
+        </div>
+    </div>
+</div>
+
+    <div id="footer-main">
+
+    </div> <script type="module" src="/src/main.js"></script>
+</body>
+</html>
