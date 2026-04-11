@@ -106,3 +106,74 @@ if(overlay) overlay.onclick = cerrarModal;
 window.onkeydown = (e) => {
     if (e.key === "Escape") cerrarModal();
 };
+
+async function renderizarProductos(categoriaFiltro) {
+    const contenedor = document.getElementById('contenedor-productos');
+    if (!contenedor) return; // Solo ejecuta si estamos en una página de productos
+
+    try {
+        const response = await fetch('http://localhost/farwind-api/get_productos.php');
+        const productos = await response.json();
+
+        // Limpiamos el contenedor por si acaso
+        contenedor.innerHTML = '';
+
+        // Filtramos solo los productos de la categoría de esta página
+        const productosFiltrados = productos.filter(p => p.categoria === categoriaFiltro);
+
+        productosFiltrados.forEach(prod => {
+            // Lógica de Rareza: Definimos el color según el campo de la DB
+            let colorRareza = 'bg-gray-400'; // Común por defecto
+            if (prod.rareza === 'raro') colorRareza = 'bg-blue-500';
+            if (prod.rareza === 'epico') colorRareza = 'bg-purple-600';
+            if (prod.rareza === 'legendario') colorRareza = 'bg-orange-500';
+
+            // Creamos la estructura de la tarjeta (Template String)
+            const card = `
+                <div class="producto-card cursor-pointer group bg-white p-4 rounded-2xl shadow-md border border-gray-100 hover:border-farwind-gold transition-all relative"
+                     data-nombre="${prod.nombre}" 
+                     data-precio="${prod.precio}"
+                     data-desc="${prod.descripcion}"
+                     data-img="${prod.imagen_url}">
+                    
+                    <span class="absolute top-4 right-4 ${colorRareza} text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase z-10">
+                        ${prod.rareza}
+                    </span>
+
+                    <div class="overflow-hidden rounded-xl mb-4 bg-gray-50 aspect-square flex items-center justify-center">
+                        <img src="${prod.imagen_url}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-xl font-bold text-farwind-blue">${prod.nombre}</h3>
+                    <p class="text-farwind-gold font-bold">${prod.precio}</p>
+                </div>
+            `;
+            contenedor.innerHTML += card;
+        });
+
+    } catch (error) {
+        console.error("Error al cargar productos:", error);
+        contenedor.innerHTML = '<p class="text-red-500">Error al conectar con el inventario del gremio.</p>';
+    }
+}
+
+// Para que funcione, detectamos en qué página estamos
+// --- Lógica de arranque según la página ---
+const seccionProductos = document.getElementById('pagina-categoria');
+if (seccionProductos) {
+    const cat = seccionProductos.dataset.categoriaActual;
+    renderizarProductos(cat);
+}
+
+// --- Lógica de arranque inteligente ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Cargamos Header y Footer (esto ya lo tienes)
+    cargarComponente('header-main', '/componentes/header.html');
+    cargarComponente('footer-main', '/componentes/footer.html');
+
+    // 2. Detectamos si estamos en una página de categoría y cargamos sus productos
+    const seccionCat = document.getElementById('pagina-categoria');
+    if (seccionCat) {
+        const categoriaParaCargar = seccionCat.dataset.categoriaActual;
+        renderizarProductos(categoriaParaCargar);
+    }
+});
