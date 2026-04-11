@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
-import { resolve } from 'path' // Necesario para gestionar las rutas de los archivos
+import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [
@@ -9,14 +9,18 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        // Mantenemos el index y añadimos todas tus páginas secundarias
+        // 1. Raíz
         main: resolve(__dirname, 'index.html'),
-        nosotros: resolve(__dirname, 'nosotros.html'),
-        productos: resolve(__dirname, 'productos.html'),
-        contacto: resolve(__dirname, 'contacto.html'),
-        pociones: resolve(__dirname, 'pociones.html'),
-        ingredientes: resolve(__dirname, 'ingredientes.html'),
-        armaduras: resolve(__dirname, 'armaduras.html'),
+
+        // 2. Carpeta "paginas"
+        contacto: resolve(__dirname, 'paginas/contacto.html'),
+        nosotros: resolve(__dirname, 'paginas/nosotros.html'),
+        productos: resolve(__dirname, 'paginas/productos.html'),
+
+        // 3. Carpeta "paginas/categorias.productos"
+        ingredientes: resolve(__dirname, 'paginas/categorias-productos/ingredientes.html'),
+        armaduras: resolve(__dirname, 'paginas/categorias-productos/armaduras.html'),
+        pociones: resolve(__dirname, 'paginas/categorias-productos/pociones.html'),
       }
     }
   }
