@@ -109,26 +109,41 @@ window.onkeydown = (e) => {
 
 async function renderizarProductos(categoriaFiltro) {
     const contenedor = document.getElementById('contenedor-productos');
-    if (!contenedor) return; // Solo ejecuta si estamos en una página de productos
+    if (!contenedor) return; 
 
     try {
-        const response = await fetch('http://localhost/farwind-api/get_productos.php');
+        // --- DETECCIÓN DE ENTORNO ---
+        // Si estamos en localhost (PC), pedimos al PHP. 
+        // Si estamos en Vercel (o cualquier otro sitio), pedimos al JSON.
+        const esLocal = window.location.hostname === 'localhost';
+        const urlAPI = esLocal 
+            ? 'http://localhost/farwind-api/get_productos.php' 
+            : '/productos.json';
+
+        const response = await fetch(urlAPI);
+        
+        if (!response.ok) throw new Error("No se pudo obtener el inventario");
+        
         const productos = await response.json();
 
-        // Limpiamos el contenedor por si acaso
+        // Limpiamos el contenedor
         contenedor.innerHTML = '';
 
-        // Filtramos solo los productos de la categoría de esta página
+        // Filtramos por categoría
         const productosFiltrados = productos.filter(p => p.categoria === categoriaFiltro);
 
+        if (productosFiltrados.length === 0) {
+            contenedor.innerHTML = '<p class="text-gray-500 italic">No hay suministros disponibles en esta categoría.</p>';
+            return;
+        }
+
         productosFiltrados.forEach(prod => {
-            // Lógica de Rareza: Definimos el color según el campo de la DB
-            let colorRareza = 'bg-gray-400'; // Común por defecto
+            // Lógica de Rareza
+            let colorRareza = 'bg-gray-400';
             if (prod.rareza === 'raro') colorRareza = 'bg-blue-500';
             if (prod.rareza === 'epico') colorRareza = 'bg-purple-600';
             if (prod.rareza === 'legendario') colorRareza = 'bg-orange-500';
 
-            // Creamos la estructura de la tarjeta (Template String)
             const card = `
                 <div class="producto-card cursor-pointer group bg-white p-4 rounded-2xl shadow-md border border-gray-100 hover:border-farwind-gold transition-all relative"
                      data-nombre="${prod.nombre}" 
@@ -156,21 +171,13 @@ async function renderizarProductos(categoriaFiltro) {
     }
 }
 
-// Para que funcione, detectamos en qué página estamos
-// --- Lógica de arranque según la página ---
-const seccionProductos = document.getElementById('pagina-categoria');
-if (seccionProductos) {
-    const cat = seccionProductos.dataset.categoriaActual;
-    renderizarProductos(cat);
-}
-
-// --- Lógica de arranque inteligente ---
+// --- LÓGICA DE ARRANQUE ÚNICA ---
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Cargamos Header y Footer (esto ya lo tienes)
+    // 1. Cargamos componentes comunes
     cargarComponente('header-main', '/componentes/header.html');
     cargarComponente('footer-main', '/componentes/footer.html');
 
-    // 2. Detectamos si estamos en una página de categoría y cargamos sus productos
+    // 2. Detectamos si es una página de categoría y cargamos productos
     const seccionCat = document.getElementById('pagina-categoria');
     if (seccionCat) {
         const categoriaParaCargar = seccionCat.dataset.categoriaActual;

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Poción de Golondrina",
+    "categoria": "pociones",
+    "precio": "150 Coronas",
+    "descripcion": "Acelera la regeneración de vitalidad tras el combate. Un clásico de la alquimia de Verden.",
+    "imagen_url": "/media/img/pociones/pocion.png",
+    "rareza": "raro"
+  },
+  {
+    "id": 2,
+    "nombre": "Flor de Espino",
+    "categoria": "ingredientes",
+    "precio": "45 Coronas",
+    "descripcion": "Planta rara recolectada en los bosques del Norte. Base para elixires de energía.",
+    "imagen_url": "/media/img/ingredientesAlquimia/flor.png",
+    "rareza": "comun"
+  },
+  {
+    "id": 3,
+    "nombre": "Coraza de Acero",
+    "categoria": "armaduras",
+    "precio": "1200 Coronas",
+    "descripcion": "Forjada por maestros enanos. Protección pesada para caballeros de la orden.",
+    "imagen_url": "/media/img/armadura/armadura.png",
+    "rareza": "legendario"
+  }
+]
