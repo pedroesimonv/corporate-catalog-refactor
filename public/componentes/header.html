@@ -1,24 +1,51 @@
 <header class="bg-farwind-blue text-white shadow-xl sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-farwind-gold rounded-full flex items-center justify-center shadow-inner">
-                    <span class="text-farwind-blue font-bold text-xl">RF</span>
-                </div>
-                <span class="text-2xl font-bold tracking-tighter text-farwind-gold">RENN FARWIND</span>
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        
+        <a href="/index.html" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-farwind-gold rounded-full flex items-center justify-center shadow-inner group-hover:rotate-12 transition-transform">
+                <span class="text-farwind-blue font-bold text-xl">RF</span>
             </div>
+            <span class="text-2xl font-bold tracking-tighter text-farwind-gold">RENN FARWIND</span>
+        </a>
 
-            <ul class="hidden md:flex gap-8 font-medium">
-                <li><a href="/index.html" class="hover:text-farwind-gold transition-colors underline-offset-8 decoration-2 hover:underline">Inicio</a></li>
-                <li><a href="/paginas/productos.html" class="hover:text-farwind-gold transition-colors">Productos</a></li>
-                <li><a href="/paginas/nosotros.html" class="hover:text-farwind-gold transition-colors">Nosotros</a></li>
-                <li><a href="/paginas/contacto.html" class="bg-farwind-gold text-farwind-blue px-4 py-2 rounded-lg font-bold hover:bg-white transition-all">Contacto</a></li>
-            </ul>
+        <ul class="hidden md:flex gap-8 font-medium items-center">
+            <li>
+                <a href="/index.html" class="hover:text-farwind-gold transition-colors underline-offset-8 decoration-2 hover:underline">Inicio</a>
+            </li>
 
-            <button class="md:hidden text-farwind-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </button>
-        </nav>
-    </header>
+            <li class="relative group">
+                <a href="/paginas/productos.html" class="hover:text-farwind-gold transition-colors flex items-center gap-1 py-2">
+                    Productos
+                    <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </a>
+
+                <div class="absolute left-0 mt-0 w-48 bg-white text-farwind-blue shadow-2xl rounded-xl py-2 hidden group-hover:block animate-in fade-in slide-in-from-top-2 border-t-4 border-farwind-gold">
+                    <a href="/paginas/categorias-productos/pociones.html" class="block px-4 py-2 hover:bg-gray-100 hover:text-farwind-gold transition-colors font-semibold">
+                        🧪 Pociones
+                    </a>
+                    <a href="/paginas/categorias-productos/ingredientes.html" class="block px-4 py-2 hover:bg-gray-50 hover:text-farwind-gold transition-colors font-semibold">
+                        🌿 Ingredientes
+                    </a>
+                    <a href="/paginas/categorias-productos/armaduras.html" class="block px-4 py-2 hover:bg-gray-50 hover:text-farwind-gold transition-colors font-semibold">
+                        🛡️ Armaduras
+                    </a>
+                    <hr class="my-1 border-gray-100">
+                    <a href="/paginas/productos.html" class="block px-4 py-2 text-xs uppercase tracking-widest text-gray-400 hover:text-farwind-blue">
+                        Ver todo el catálogo
+                    </a>
+                </div>
+            </li>
+
+            <li><a href="/paginas/nosotros.html" class="hover:text-farwind-gold transition-colors">Nosotros</a></li>
+            <li><a href="/paginas/contacto.html" class="bg-farwind-gold text-farwind-blue px-4 py-2 rounded-lg font-bold hover:bg-white hover:scale-105 transition-all">Contacto</a></li>
+        </ul>
+
+        <button class="md:hidden text-farwind-gold">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+    </nav>
+</header>
